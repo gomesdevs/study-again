@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -10,12 +9,16 @@
             background-color: #f0f0f0;
             padding: 20px;
             border-radius: 5px;
-            width: 350px;
+            width: 80%;
             margin: auto;
             font-family: Arial, sans-serif;
             font-size: 16px;
             color: #333;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
         }
         body {
             background-color: #4B0082;
@@ -37,52 +40,137 @@
             margin-bottom: 20px;
             color: #4B0082;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            text-align: center;
         }
-        .porra {
-            padding: 20px;
-            border-radius: 5px;
-            margin: auto;
-            font-family: Arial, sans-serif;
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 calc(33% - 20px);
+            min-width: 250px;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        textarea {
+            resize: vertical;
+        }
+        input[type="submit"] {
+            background-color: #4B0082;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            padding: 10px 20px;
             font-size: 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover {
+            background-color: #370062;
         }
     </style>
 </head>
-<body class="body">
+<body>
     <form class="forms" onsubmit="event.preventDefault(); alert('Formulário enviado com sucesso!');">
-        <div class="porra">
-            <h1 class="title">Questionário Musical</h1>
+        <h1 class="title">Questionário Musical</h1>
+
+        <!-- Nome do usuário -->
+        <div class="field-group">
+            <label for="nome">Nome do Usuário:</label>
+            <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
         </div>
-        <label for="nome">Nome do Usuário:</label><br>
-        <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required><br><br>
 
-        <label for="estilo">Qual estilo musical você ouve?</label><br>
-        <select id="estilo" name="estilo" required>
-            <option value="trap_rj">Trap RJ</option>
-            <option value="hip_hop_gringo">Hip-Hop Gringo</option>
-            <option value="trap_sp">Trap SP</option>
-            <option value="boombap">Boombap</option>
-            <option value="outros">Outros</option>
-        </select><br><br>
+        <!-- Data de nascimento -->
+        <div class="field-group">
+            <label for="nascimento">Data de Nascimento:</label>
+            <input type="date" id="nascimento" name="nascimento" required>
+        </div>
 
-        <label for="minutos">Média de minutos mensais de audição:</label><br>
-        <input step="100" maxlength="5" type="number" id="minutos" name="minutos" required><br><br>
+        <!-- Estilo musical -->
+        <div class="field-group">
+            <label for="estilo">Qual estilo musical você ouve?</label>
+            <select id="estilo" name="estilo" required>
+                <option value="trap_rj">Trap RJ</option>
+                <option value="hip_hop_gringo">Hip-Hop Gringo</option>
+                <option value="trap_sp">Trap SP</option>
+                <option value="boombap">Boombap</option>
+                <option value="outros">Outros</option>
+            </select>
+        </div>
 
-        <label for="artista_favorito">Artista Favorito:</label><br>
-        <input type="text" id="artista_favorito" name="artista_favorito" placeholder="Ex: Kanye West"><br><br>
+        <!-- Média de minutos mensais -->
+        <div class="field-group">
+            <label for="minutos">Média de minutos mensais de audição:</label>
+            <input type="range" id="minutos" name="minutos" min="0" max="10000" step="100" oninput="this.nextElementSibling.value = this.value">
+            <output>5000</output>
+        </div>
 
-        <label for="musica_favorita">Música Favorita:</label><br>
-        <input type="text" id="musica_favorita" name="musica_favorita" placeholder="Ex: Stronger"><br><br>
+        <!-- Artista favorito -->
+        <div class="field-group">
+            <label for="artista_favorito">Artista Favorito:</label>
+            <input type="text" id="artista_favorito" name="artista_favorito" placeholder="Ex: Kanye West">
+        </div>
 
-        <label for="frequencia">Em que momento do dia você ouve música?</label><br>
-        <select id="frequencia" name="frequencia" required>
-            <option value="" disabled selected>Selecione uma opção</option>
-            <option value="manha">Na parte da manhã</option>
-            <option value="tarde">Durante a Tarde</option>
-            <option value="noite">A noite</option>
-            <option value="madrugada">Na madrugada</option>
-        </select><br><br>
+        <!-- Música favorita -->
+        <div class="field-group">
+            <label for="musica_favorita">Música Favorita:</label>
+            <input type="text" id="musica_favorita" name="musica_favorita" placeholder="Ex: Stronger">
+        </div>
 
-        <input type="submit" value="Enviar">
+        <!-- Frequência de audição -->
+        <div class="field-group">
+            <label for="frequencia">Em que momento do dia você ouve música?</label>
+            <select id="frequencia" name="frequencia" required>
+                <option value="" disabled selected>Selecione uma opção</option>
+                <option value="manha">Na parte da manhã</option>
+                <option value="tarde">Durante a tarde</option>
+                <option value="noite">À noite</option>
+                <option value="madrugada">Na madrugada</option>
+            </select>
+        </div>
+
+        <!-- Gênero preferido -->
+        <div class="field-group">
+            <label>Qual é o genêro musical que você menos gosta?</label>
+            <input type="radio" id="rock" name="genero_preferido" value="rock" required>
+            <label for="rock">Rock</label>
+            <input type="radio" id="pop" name="genero_preferido" value="pop">
+            <label for="pop">Pop</label>
+            <input type="radio" id="eletronica" name="genero_preferido" value="eletronica">
+            <label for="eletronica">Eletrônica</label>
+            <input type="radio" id="classica" name="genero_preferido" value="classica">
+            <label for="classica">Clássica</label>
+        </div>
+
+        <!-- Notificações -->
+        <div class="field-group">
+            <label for="notificacoes">Gostaria de receber notificações sobre novas músicas?</label>
+            <input type="checkbox" id="notificacoes" name="notificacoes">
+        </div>
+
+        <!-- Arquivo de playlist -->
+        <div class="field-group">
+            <label for="playlist">Envie sua playlist em formato .txt:</label>
+            <input type="file" id="playlist" name="playlist" accept=".txt">
+        </div>
+
+        <!-- Comentários -->
+        <div class="field-group" style="flex: 1 1 100%;">
+            <label for="comentarios">Deixe seus comentários:</label>
+            <textarea id="comentarios" name="comentarios" rows="4" placeholder="Digite seus comentários aqui..."></textarea>
+        </div>
+
+        <!-- Botão de envio -->
+        <div class="field-group" style="flex: 1 1 100%; text-align: center;">
+            <input type="submit" value="Enviar">
+        </div>
     </form>
 </body>
 </html>
